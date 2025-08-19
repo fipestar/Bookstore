@@ -7,6 +7,22 @@ export const useCart = () => {
     return localStorageCart ? JSON.parse(localStorageCart) : []
   }
 
+  const handleAddToCart = () => {
+        addToCart(book)
+        // Pequeña animación de feedback
+        const button = document.getElementById(`btn-${id}`)
+        if (button) {
+            button.textContent = '✅ ¡Agregado!'
+            button.classList.add('bg-green-500', 'hover:bg-green-600')
+            button.classList.remove('bg-blue-600', 'hover:bg-blue-700')
+            setTimeout(() => {
+                button.textContent = 'Agregar al Carrito'
+                button.classList.remove('bg-green-500', 'hover:bg-green-600')
+                button.classList.add('bg-blue-600', 'hover:bg-blue-700')
+            }, 1500)
+        }
+    }
+
   const [data] = useState(db)  
   const [cart, setCart] = useState(initialCart)
   
@@ -75,6 +91,7 @@ export const useCart = () => {
     increaseQuantity,
     decreaseQuantity,
     isEmpty,
-    cartTotal
+    cartTotal,
+    handleAddToCart
    }
 }
