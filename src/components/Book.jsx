@@ -1,5 +1,21 @@
-export default function Book({book, addToCart, handleAddToCart}){
+export default function Book({book, addToCart}){
     const { id, name, image, description, price } = book;
+
+    const handleAddToCart = () => {
+        addToCart(book)
+        // Pequeña animación de feedback
+        const button = document.getElementById(`btn-${id}`)
+        if (button) {
+            button.textContent = '✅ ¡Agregado!'
+            button.classList.add('bg-green-500', 'hover:bg-green-600')
+            button.classList.remove('bg-blue-600', 'hover:bg-blue-700')
+            setTimeout(() => {
+                button.textContent = 'Agregar al Carrito'
+                button.classList.remove('bg-green-500', 'hover:bg-green-600')
+                button.classList.add('bg-blue-600', 'hover:bg-blue-700')
+            }, 1500)
+        }
+    }
     
     
 

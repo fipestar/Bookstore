@@ -91,7 +91,6 @@ export const useCart = () => {
     increaseQuantity,
     decreaseQuantity,
     isEmpty,
-    cartTotal,
-    handleAddToCart
+    cartTotal
    }
 }
