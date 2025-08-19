@@ -1,5 +1,5 @@
 import { useState } from 'react'
-export default function Header({ cart = [] }) {
+export default function Header({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, cartTotal }) {
     const [isCartOpen, setIsCartOpen] = useState(false)
 
     const toggleCart = () => {
@@ -65,12 +65,21 @@ export default function Header({ cart = [] }) {
                   <td className="px-2">{book.name}</td>
                   <td className="font-semibold">${book.price}</td>
                   <td className="flex items-center gap-2">
-                    <button className="px-2 py-1 bg-gray-800 text-white rounded">-</button>
+                    <button 
+                        type="button"
+                        onClick={() => decreaseQuantity(book.id)}
+                        className="px-2 py-1 bg-gray-800 text-white rounded hover:bg-gray-700">-</button>
                     <span>{book.quantity || 1}</span>
-                    <button className="px-2 py-1 bg-gray-800 text-white rounded">+</button>
+                    <button 
+                        type="button"
+                        onClick={() => increaseQuantity(book.id)}
+                        className="px-2 py-1 bg-gray-800 text-white rounded hover:bg-gray-700">+</button>
                   </td>
                   <td>
-                    <button className="px-2 py-1 bg-red-500 text-white rounded">X</button>
+                    <button 
+                        type="button"
+                        onClick={() => removeFromCart(book.id)}
+                        className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-400">X</button>
                   </td>
                 </tr>
                 ))}
@@ -78,7 +87,7 @@ export default function Header({ cart = [] }) {
             </table>
 
             <p className="text-right font-semibold mt-3">
-              Total: <span>${cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0).toLocaleString()}</span>
+              Total: <span>${cartTotal}</span>
             </p>
           </>
         )}
@@ -87,12 +96,12 @@ export default function Header({ cart = [] }) {
         <button 
           onClick={() => {
             // Aquí irá la lógica para vaciar el carrito
-            console.log('Vaciar carrito')
-            setIsCartOpen(false)
+            clearCart()
+            setIsCartOpen(true)
           }}
           className="w-full mt-3 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition-colors"
         >
-          Vaciar Carrito
+          {isEmpty ? 'El carrito está vacío' : 'Vaciar Carrito'}
         </button>
       </div>
     </div>

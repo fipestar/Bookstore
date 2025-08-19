@@ -1,31 +1,22 @@
-import { useState } from 'react'
 import Header from './components/header'
 import Book from './components/Book'
-import { db } from './data/db'
 import './App.css'
+import { useCart } from './hooks/useCart'
 
 function App() {
 
-  const [data, setData] = useState(db)  
-  const [cart, setCart] = useState([])
-
-  function addToCart(item) {
-    const itemExists = cart.findIndex((book) => book.id === item.id) 
-    if (itemExists >= 0) {
-      // Si el libro ya está en el carrito, no lo agregamos de nuevo
-      const updatedCart = [...cart]
-      updatedCart[itemExists].quantity ++
-      setCart(updatedCart)
-    } else {
-      item.quantity = 1; // Asignar una cantidad inicial de 1 al libro
-      setCart([...cart, item])
-    }
-  }
+  const { data, cart, addToCart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity, isEmpty, cartTotal } = useCart()
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header 
         cart={cart}
+        isEmpty={isEmpty}
+        cartTotal={cartTotal}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
       />
 
 <main className="flex-1 container mx-auto mt-10 pb-10">
@@ -36,7 +27,6 @@ function App() {
       <Book 
           key={book.id} 
           book={book}   // Asegúrate de que Book acepte props
-          setCart={setCart} 
           addToCart={addToCart}
       />
     ))}
