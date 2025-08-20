@@ -196,10 +196,9 @@ xl: 1280px  /* Desktop grande */
 
 ## 👨‍💻 Autor
 
-**Tu Nombre**
-- Portfolio: [tu-portfolio.com](https://tu-portfolio.com)
-- LinkedIn: [tu-linkedin](https://linkedin.com/in/tu-perfil)
-- GitHub: [tu-github](https://github.com/tu-usuario)
+**Juan David Barbosa Neira**
+- Portfolio: [portafoliobarbosa.com](https://portafoliobarbosa.netlify.app/)
+- LinkedIn: [linkedin](https://www.linkedin.com/in/juan-david-barbosa-neira-480a00216/)
 
 ## 📄 Licencia
 
